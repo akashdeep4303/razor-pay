@@ -1,0 +1,75 @@
+{
+  "name": "woocommerce-connector",
+  "version": "1.0.0",
+  "title": "WooCommerce private connector for Agent Studio",
+  "description": "Read-only WooCommerce orders, products, and inventory primitives for a merchant-deployed agent.",
+  "auth": {
+    "oauth_app": {
+      "type": "woocommerce_app_authentication",
+      "authorize_path": "/wc-auth/v1/authorize",
+      "scopes": ["read"],
+      "notes": "Merchant approves a read-only REST API key. Callback stores consumer key/secret locally."
+    },
+    "api_key": {
+      "type": "woocommerce_rest_api_keys",
+      "fields": ["WC_STORE_URL", "WC_CONSUMER_KEY", "WC_CONSUMER_SECRET"],
+      "transport": ["basic", "query", "oauth1"]
+    }
+  },
+  "rate_limits": {
+    "client_rps": 5,
+    "max_concurrency": 3,
+    "retries_on": [429, 500, 502, 503, 504],
+    "honors_retry_after": true
+  },
+  "tools": [
+    {
+      "name": "woocommerce_list_orders",
+      "primitive": "list",
+      "resource": "orders",
+      "input": ["page", "perPage", "status", "after", "before"]
+    },
+    {
+      "name": "woocommerce_get_order",
+      "primitive": "get",
+      "resource": "orders",
+      "input": ["id"]
+    },
+    {
+      "name": "woocommerce_search_orders",
+      "primitive": "search",
+      "resource": "orders",
+      "input": ["query", "status", "page", "perPage"]
+    },
+    {
+      "name": "woocommerce_list_products",
+      "primitive": "list",
+      "resource": "products",
+      "input": ["page", "perPage", "stockStatus"]
+    },
+    {
+      "name": "woocommerce_get_product",
+      "primitive": "get",
+      "resource": "products",
+      "input": ["id"]
+    },
+    {
+      "name": "woocommerce_search_products",
+      "primitive": "search",
+      "resource": "products",
+      "input": ["query", "sku", "page", "perPage"]
+    },
+    {
+      "name": "woocommerce_list_inventory",
+      "primitive": "list",
+      "resource": "inventory",
+      "input": ["page", "perPage", "sku", "stockStatus", "lowStockOnly"]
+    },
+    {
+      "name": "woocommerce_get_inventory",
+      "primitive": "get",
+      "resource": "inventory",
+      "input": ["productId"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "agent-studio-woocommerce-connector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Private WooCommerce connector for Razorpay Agent Studio (FDE assignment)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "wc-connector": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "mock": "tsx src/mock/httpServer.ts",
+    "connect": "tsx src/cli/connect.ts",
+    "demo": "tsx src/demo.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}
